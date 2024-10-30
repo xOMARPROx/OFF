@@ -1,0 +1,75 @@
+CREATE database [Libarary]
+on primary
+
+(name=N'Libarary' , FILENAME='D:\Databases\myMUSCLIES\Libarary.mdf')
+LOG ON
+(name=N'Libarary_log' , FILENAME='D:\Databases\myMUSCLIES\Libarary_log.ldf')
+use Libarary
+Create Table Authors(
+Author_ID int not null primary key ,
+Author_Name Nvarchar(50) ,
+Author_Mail int ,
+)
+Create Table Books (
+Book_ID int not null primary key ,
+Book_Name nvarchar(50),
+Author_ID int not null,
+foreign key (Author_ID) references Authors (Author_ID),
+)
+
+Create Table Locationn(
+Location_ID int not null primary key,
+Location_Name nvarchar(50),
+)
+
+INSERT INTO Authors
+(Author_ID,Author_Name,Author_Mail)
+Values
+(1,'OMAR',3)
+
+Create Table employees(
+Employess_ID int not null primary key ,
+previx nvarchar(10),
+First_Name nvarchar(10) ,
+Last_Name nvarchar(10),
+age int not null,
+)
+INSERT INTO employees
+values
+(1,'ENG','Omar','Ahmed',17),
+(2,'ENG','Kero','Sameir',17),
+(3,'ENG','Elgohary','Mohamed',17),
+(4,'ENG','Jana','Safar',17),
+(5,'ENG','Sama','Momeen',17)
+
+ALTER Table employees
+ADD Emp_Salary decimal(12,2)
+
+update employees set Emp_Salary = 10000 where Employess_ID=1
+update employees set Emp_Salary = 12133 where Employess_ID=2
+update employees set Emp_Salary = 10234 where Employess_ID=3
+update employees set Emp_Salary = 10034556 where Employess_ID=4
+update employees set Emp_Salary = 1012345 where Employess_ID=5
+
+update employees set Emp_Salary = Emp_Salary + 1334 where Employess_ID = 3
+
+Select min(Emp_Salary) as 'Numbers' FROM employees
+Select max(Emp_Salary) as 'Numbers' FROM employees
+Select sum(Emp_Salary) as 'Numbers' FROM employees
+Select AVG(Emp_Salary) as 'Numbers' FROM employees
+Select COUNT(Emp_Salary) as 'Numbers' FROM employees 
+Select * from employees 
+
+INSERT INTO Books
+values
+(1,'Discover',1),
+(2,'Adventure',1),
+(3,'Story',1),
+(4,'Seince',1)
+
+alter table employees
+Add employees_Gender nvarchar(10)
+
+update employees set employees_Gender ='male'
+update  employees set employees_Gender = 'female' where Employess_ID in(5,4)
+select * from employees
