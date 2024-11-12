@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FarmingFruitsModelStoreContainer" CdmEntityContainer="FarmingFruitsEntities2">
+    <EntitySetMapping Name="Fruits">
+      <EntityTypeMapping TypeName="FarmingFruitsModel.Fruit">
+        <MappingFragment StoreEntitySet="Fruits">
+          <ScalarProperty Name="Fruit_ID" ColumnName="Fruit_ID" />
+          <ScalarProperty Name="Fruit_Name" ColumnName="Fruit_Name" />
+          <ScalarProperty Name="Fruit_Price" ColumnName="Fruit_Price" />
+          <ScalarProperty Name="Fruit_Barcode" ColumnName="Fruit_Barcode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventories">
+      <EntityTypeMapping TypeName="FarmingFruitsModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="Inventory_ID" ColumnName="Inventory_ID" />
+          <ScalarProperty Name="Inventory_Name" ColumnName="Inventory_Name" />
+          <ScalarProperty Name="Fruit_ID" ColumnName="Fruit_ID" />
+          <ScalarProperty Name="Usr_ID" ColumnName="Usr_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDeatils">
+      <EntityTypeMapping TypeName="FarmingFruitsModel.UserDeatil">
+        <MappingFragment StoreEntitySet="UserDeatils">
+          <ScalarProperty Name="Usr_ID" ColumnName="Usr_ID" />
+          <ScalarProperty Name="Usr_Name" ColumnName="Usr_Name" />
+          <ScalarProperty Name="Usr_Pass" ColumnName="Usr_Pass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

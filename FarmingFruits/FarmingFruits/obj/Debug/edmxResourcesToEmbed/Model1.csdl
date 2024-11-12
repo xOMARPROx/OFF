@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmingFruitsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Fruit">
+    <Key>
+      <PropertyRef Name="Fruit_ID" />
+    </Key>
+    <Property Name="Fruit_ID" Type="Int32" Nullable="false" />
+    <Property Name="Fruit_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fruit_Price" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Fruit_Barcode" Type="Int32" />
+    <NavigationProperty Name="Inventories" Relationship="Self.FK__Inventory__Fruit__5AEE82B9" FromRole="Fruits" ToRole="Inventory" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="Inventory_ID" />
+    </Key>
+    <Property Name="Inventory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Inventory_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fruit_ID" Type="Int32" />
+    <Property Name="Usr_ID" Type="Int32" />
+    <NavigationProperty Name="Fruit" Relationship="Self.FK__Inventory__Fruit__5AEE82B9" FromRole="Inventory" ToRole="Fruits" />
+    <NavigationProperty Name="UserDeatil" Relationship="Self.FK__Inventory__Usr_I__5BE2A6F2" FromRole="Inventory" ToRole="UserDeatils" />
+  </EntityType>
+  <EntityType Name="UserDeatil">
+    <Key>
+      <PropertyRef Name="Usr_ID" />
+    </Key>
+    <Property Name="Usr_ID" Type="Int32" Nullable="false" />
+    <Property Name="Usr_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Usr_Pass" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Inventories" Relationship="Self.FK__Inventory__Usr_I__5BE2A6F2" FromRole="UserDeatils" ToRole="Inventory" />
+  </EntityType>
+  <Association Name="FK__Inventory__Fruit__5AEE82B9">
+    <End Role="Fruits" Type="Self.Fruit" Multiplicity="0..1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fruits">
+        <PropertyRef Name="Fruit_ID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="Fruit_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Usr_I__5BE2A6F2">
+    <End Role="UserDeatils" Type="Self.UserDeatil" Multiplicity="0..1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDeatils">
+        <PropertyRef Name="Usr_ID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="Usr_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FarmingFruitsEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Fruits" EntityType="Self.Fruit" />
+    <EntitySet Name="Inventories" EntityType="Self.Inventory" />
+    <EntitySet Name="UserDeatils" EntityType="Self.UserDeatil" />
+    <AssociationSet Name="FK__Inventory__Fruit__5AEE82B9" Association="Self.FK__Inventory__Fruit__5AEE82B9">
+      <End Role="Fruits" EntitySet="Fruits" />
+      <End Role="Inventory" EntitySet="Inventories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Usr_I__5BE2A6F2" Association="Self.FK__Inventory__Usr_I__5BE2A6F2">
+      <End Role="UserDeatils" EntitySet="UserDeatils" />
+      <End Role="Inventory" EntitySet="Inventories" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

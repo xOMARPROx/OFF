@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FarmingFruitsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Fruits">
+    <Key>
+      <PropertyRef Name="Fruit_ID" />
+    </Key>
+    <Property Name="Fruit_ID" Type="int" Nullable="false" />
+    <Property Name="Fruit_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fruit_Price" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Fruit_Barcode" Type="int" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="Inventory_ID" />
+    </Key>
+    <Property Name="Inventory_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Inventory_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fruit_ID" Type="int" />
+    <Property Name="Usr_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="UserDeatils">
+    <Key>
+      <PropertyRef Name="Usr_ID" />
+    </Key>
+    <Property Name="Usr_ID" Type="int" Nullable="false" />
+    <Property Name="Usr_Name" Type="nvarchar" MaxLength="30" />
+    <Property Name="Usr_Pass" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__Inventory__Fruit__5AEE82B9">
+    <End Role="Fruits" Type="Self.Fruits" Multiplicity="0..1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fruits">
+        <PropertyRef Name="Fruit_ID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="Fruit_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Usr_I__5BE2A6F2">
+    <End Role="UserDeatils" Type="Self.UserDeatils" Multiplicity="0..1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDeatils">
+        <PropertyRef Name="Usr_ID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="Usr_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FarmingFruitsModelStoreContainer">
+    <EntitySet Name="Fruits" EntityType="Self.Fruits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDeatils" EntityType="Self.UserDeatils" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Inventory__Fruit__5AEE82B9" Association="Self.FK__Inventory__Fruit__5AEE82B9">
+      <End Role="Fruits" EntitySet="Fruits" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Usr_I__5BE2A6F2" Association="Self.FK__Inventory__Usr_I__5BE2A6F2">
+      <End Role="UserDeatils" EntitySet="UserDeatils" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
